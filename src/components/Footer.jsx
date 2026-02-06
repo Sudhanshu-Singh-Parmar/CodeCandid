@@ -1,3 +1,6 @@
+{/* Footer Updated */}
+
+
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -58,7 +61,7 @@ export default function Footer() {
         <div>
           <h3 className="text-white font-semibold mb-4">Contact</h3>
           <p className="text-sm text-gray-400">
-            IIIT Kota <br />
+            Kota <br />
             Rajasthan, India
           </p>
           <p className="text-sm mt-2 text-cyan-400">
