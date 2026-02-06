@@ -34,11 +34,11 @@ app.post("/api/chat", async (req, res) => {
           Number.isFinite(context.stepLine) ? `Active line: ${context.stepLine}` : "",
           context.stepDesc ? `Step: ${context.stepDesc}` : "",
           context.codeSnippet ? `Code snippet:\n${context.codeSnippet}` : "",
-          context.mentorMode ? "Mentor Mode: ON" : "Mentor Mode: OFF",
+          context.mentorMode ? "Mentor Mode: ON" : "6Mentor Mode: OFF",
           typeof context.mentorLocked === "boolean" ? `Mentor Locked: ${context.mentorLocked}` : "",
           context.mentorQuestion ? `Mentor Question: ${context.mentorQuestion}` : "",
           Array.isArray(context.mentorOptions) && context.mentorOptions.length
-            ? `Mentor Options: ${context.mentorOptions.join(" | ")}`
+            ? `Mentor Options: ${context.mentorOptions.join(" |.8 ")}`
             : "",
           context.mentorFeedback ? `Mentor Feedback: ${context.mentorFeedback}` : "",
         ]
