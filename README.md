@@ -1,7 +1,7 @@
 # 🚀 CodeCandid  
-**A Glass-Box Algorithm Learning & Simulation Platform**
+**A Glass-Box Algorithm Learning, Simulation & AI-Assisted Education Platform**
 
-> *See algorithms think.*
+> *See algorithms think. Ask them why.*
 
 ---
 
@@ -9,79 +9,93 @@
 
 **CodeCandid** is an interactive algorithm learning and simulation platform designed to make algorithms **transparent, explainable, and intuitive**.
 
-Instead of treating algorithms as black boxes that magically produce outputs, CodeCandid exposes their **internal execution flow**, enabling learners to observe how data, variables, and states evolve at every step.
+Unlike traditional tools that treat algorithms as black boxes, CodeCandid follows a **glass-box learning approach**, exposing the **internal execution flow, decision points, and evolving states** of algorithms — step by step.
 
-The platform follows a **glass-box learning approach**, empowering students to build deep conceptual understanding through visualization, exploration, and guided execution.
+To further enhance learning, CodeCandid integrates an **AI-powered chatbot**, enabling learners to ask questions, clarify doubts, and receive contextual explanations during exploration.
 
 ---
 
 ## 🎯 Problem We Address
 
-Learning algorithms is often difficult because:
+Learning algorithms is challenging because:
+
 - Execution happens mentally or on paper  
 - Internal states are hidden  
-- Students memorize rather than understand  
-- Debugging logic flow feels abstract  
+- Students memorize steps instead of understanding logic  
+- Debugging recursion, DP, and graphs feels abstract  
+- Learners often lack real-time guidance  
 
-Traditional tools focus on results, not reasoning.
+Most platforms focus on *outputs*, not *reasoning*.
 
 ---
 
-## 💡 Our Approach
+## 💡 Our Solution
 
-CodeCandid bridges this gap by allowing users to:
-- Visualize algorithm execution step-by-step  
-- Inspect intermediate states and decisions  
-- Navigate forward and backward through execution  
-- Learn at their own pace with guided assistance  
+CodeCandid transforms algorithm learning into an **interactive, guided experience** by combining:
 
-This transforms algorithm learning into an **interactive, experience-driven process**.
+- Step-by-step visualization  
+- State inspection and execution tracing  
+- Mentor-style learning checkpoints  
+- AI-assisted explanations and doubt resolution  
+
+This approach enables learners to **observe, question, and understand** algorithms as they execute.
 
 ---
 
 ## ✨ Core Capabilities
 
-### 🔍 Transparent Execution
-- Step-wise simulation  
-- Internal state visibility  
-- No hidden logic  
+### 🔍 Transparent Execution (Glass-Box Model)
+- Step-wise simulation of algorithms  
+- Visibility into internal variables, call stack, and states  
+- Forward, backward, and seek navigation  
+- No hidden execution logic  
 
-### 📊 Multi-Domain Support
+### 📊 Multi-Domain Algorithm Support
 - Array-based algorithms  
-- Graph-based algorithms  
-- Dynamic programming workflows  
-- Extensible architecture for future categories  
+- Graph algorithms  
+- Dynamic Programming workflows  
+- Recursive algorithms with call-stack visualization  
+- Modular design for easy expansion  
 
-### 🧠 Guided Learning Mode
-- Mentor-style checkpoints  
-- Conceptual prompts during execution  
-- Controlled progression for better understanding  
+### 🧠 Mentor-Guided Learning Mode
+- Conceptual checkpoints during execution  
+- Learner interaction before progressing  
+- Encourages thinking instead of passive watching  
+
+### 🤖 AI-Powered Learning Assistant
+- Integrated AI chatbot (powered by Gemini API)  
+- Ask questions in natural language  
+- Get algorithm explanations, intuition, and clarifications  
+- Supports self-paced, guided learning  
+- Acts as a virtual teaching assistant  
 
 ### 🧾 Execution Event Timeline
 - Sequential logging of algorithm events  
+- One-time logging per step for clarity  
 - Clear mapping between logic and behavior  
-- One-time logging per execution step  
 
 ### 🧮 State Inspection Panels
-- Variables  
-- Call stack  
-- Execution descriptions  
+- Variable tracking  
+- Call stack visualization  
+- Step / event descriptions  
+- Recursion and DP state awareness  
 
-### ⚙️ Playback & Control
+### ⚙️ Playback & Control System
 - Build execution steps  
-- Play, pause, seek, and step navigation  
+- Play, pause, reset, and seek  
+- Manual step navigation  
 - Speed control for detailed or fast exploration  
 
 ---
 
 ## 🏗️ Platform Architecture
 
-CodeCandid is built as a **modular and extensible system**, where:
-- Algorithms are plug-and-play modules  
-- Visualizers adapt based on algorithm category  
-- UI components remain reusable and scalable  
+CodeCandid is built as a **modular and extensible system**:
 
-This allows easy expansion without redesigning the platform.
+- Algorithms are plug-and-play modules  
+- Visualizers adapt automatically based on algorithm type  
+- UI components are reusable and scalable  
+- AI integration remains decoupled from core logic  
 
 ---
 
@@ -90,6 +104,7 @@ This allows easy expansion without redesigning the platform.
 - **Frontend:** React + Vite  
 - **Styling:** Tailwind CSS  
 - **Visualization:** SVG & Canvas  
+- **AI Integration:** Gemini API  
 - **State Management:** React Hooks  
 - **Build & Deployment:** Vite ecosystem  
 
@@ -97,55 +112,37 @@ This allows easy expansion without redesigning the platform.
 
 ## 🎓 Educational Vision
 
-CodeCandid aligns strongly with experiential learning goals:
+CodeCandid aligns strongly with **experiential and inquiry-based learning**:
+
 - Encourages exploration over memorization  
-- Supports self-paced understanding  
+- Supports self-paced and guided learning  
 - Makes abstract concepts concrete  
-- Bridges theory with visual intuition  
-
-The platform is suitable for:
-- Students  
-- Educators  
-- Self-learners  
-- Academic virtual labs  
-
----
-
-## ⚠️ Current Scope
-
-CodeCandid is an evolving platform.  
-While it already supports multiple algorithm categories, its design prioritizes **extensibility**, enabling continuous expansion in both depth and breadth.
+- Bridges theory with execution intuition  
+- Integrates AI as a learning companion  
 
 ---
 
 ## 🚀 Future Direction
 
-Planned improvements include:
 - Advanced algorithm categories  
-- Richer graph and DP visualizations  
-- Collaborative and classroom features  
-- Learning analytics and progress tracking  
-- Enhanced explanation layers  
+- Richer recursion and DP visualizations  
+- Weighted and complex graph algorithms  
+- Personalized learning insights  
+- Classroom and instructor-oriented features  
+- Smarter AI-driven explanations  
 
 ---
 
 ## 🧑‍💻 Getting Started
 
-### Clone the repository
 ```bash
 git clone https://github.com/Sudhanshu-Singh-Parmar/CodeCandid.git
 cd CodeCandid
-```
-
-### Install dependencies
-```bash
 npm install
-```
-
-### Run locally
-```bash
+npm run server
 npm run dev
 ```
+NOTE -:  run "npm dev in new terminal"
 
 Open `http://localhost:5173` in your browser.
 
@@ -153,23 +150,17 @@ Open `http://localhost:5173` in your browser.
 
 ## 🌐 Deployment
 
-CodeCandid is deployment-ready and hosted on modern platforms such as:
+Deployment-ready for:
 - GitHub Pages  
 - Vercel  
 - Netlify  
 
 ---
 
-## 🤝 Contributions
-
-Contributions, feedback, and ideas are welcome.  
-CodeCandid is built to grow with the learning community.
-
----
-
 ## ⭐ Final Note
 
-**CodeCandid** is not just an algorithm visualizer —  
-it is a platform for **thinking, exploring, and understanding algorithms**.
+**CodeCandid** is not just an algorithm visualizer.
+
+It is a **thinking platform** — where learners can **see**, **question**, and **understand** algorithms with clarity, guidance, and intelligence.
 
 > *Transparent learning. Real understanding.*

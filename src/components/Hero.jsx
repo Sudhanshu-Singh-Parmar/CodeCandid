@@ -88,7 +88,7 @@ export default function Hero() {
           </button> */}
 
           <a
-            href="https://youtu.be/rFGNNeH_CxY"
+            href="https://youtu.be/ahYSw9lYJ64?si=tSjQddm4kVv1G66-"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-4 bg-white/10 backdrop-blur-md
