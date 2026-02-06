@@ -48,6 +48,119 @@ const POINTER_STYLES = {
   r: "border-purple-300/40 text-purple-700 dark:text-purple-200 bg-purple-400/10",
 };
 
+const DEFAULT_ARRAY = [5, 1, 4, 2, 8, 3];
+
+const buildDefaultGraphInput = () => ({
+  start: "A",
+  graph: {
+    directed: false,
+    nodes: [
+      { id: "A", x: 80, y: 80 },
+      { id: "B", x: 220, y: 60 },
+      { id: "C", x: 330, y: 140 },
+      { id: "D", x: 140, y: 200 },
+      { id: "E", x: 260, y: 240 },
+    ],
+    edges: [
+      { from: "A", to: "B" },
+      { from: "A", to: "D" },
+      { from: "B", to: "C" },
+      { from: "B", to: "D" },
+      { from: "C", to: "E" },
+      { from: "D", to: "E" },
+    ],
+  },
+});
+
+const buildDefaultDpInput = () => ({
+  weights: [2, 3, 4, 5],
+  values: [3, 4, 5, 8],
+  W: 8,
+});
+
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+const makeNodeId = (idx) => {
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  if (idx < letters.length) return letters[idx];
+  const suffix = Math.floor(idx / letters.length);
+  const prefix = letters[idx % letters.length];
+  return `${prefix}${suffix}`;
+};
+
+const layoutNodes = (ids) => {
+  const count = ids.length;
+  const cx = 210;
+  const cy = 160;
+  const radius = clamp(70 + count * 2.5, 90, 140);
+  const jitter = 12;
+  const startAngle = Math.random() * Math.PI * 2;
+
+  return ids.map((id, i) => {
+    const angle = startAngle + (2 * Math.PI * i) / count;
+    const x = clamp(Math.round(cx + radius * Math.cos(angle) + (Math.random() - 0.5) * jitter), 30, 390);
+    const y = clamp(Math.round(cy + radius * Math.sin(angle) + (Math.random() - 0.5) * jitter), 30, 290);
+    return { id, x, y };
+  });
+};
+
+const buildRandomGraphInput = (count) => {
+  const nodeCount = clamp(Math.floor(Number.isFinite(count) ? count : 6), 2, 40);
+  const ids = Array.from({ length: nodeCount }, (_, i) => makeNodeId(i));
+  const nodes = layoutNodes(ids);
+
+  const edges = [];
+  const edgeSet = new Set();
+  const addEdge = (a, b) => {
+    if (a === b) return false;
+    const key = [a, b].sort().join("--");
+    if (edgeSet.has(key)) return false;
+    edgeSet.add(key);
+    edges.push({ from: a, to: b });
+    return true;
+  };
+
+  // Build a connected base (random spanning tree)
+  for (let i = 1; i < ids.length; i += 1) {
+    const a = ids[i];
+    const b = ids[randInt(0, i - 1)];
+    addEdge(a, b);
+  }
+
+  const maxEdges = Math.floor((ids.length * (ids.length - 1)) / 2);
+  const maxExtra = Math.max(0, maxEdges - (ids.length - 1));
+  const extraEdges = randInt(0, Math.min(maxExtra, ids.length));
+  const targetEdges = (ids.length - 1) + extraEdges;
+
+  let attempts = 0;
+  while (edges.length < targetEdges && attempts < maxEdges * 3) {
+    const a = ids[randInt(0, ids.length - 1)];
+    const b = ids[randInt(0, ids.length - 1)];
+    addEdge(a, b);
+    attempts += 1;
+  }
+
+  const start = ids[randInt(0, ids.length - 1)];
+  return {
+    start,
+    graph: {
+      directed: false,
+      nodes,
+      edges,
+    },
+  };
+};
+
+const buildRandomDpInput = (count, maxVal) => {
+  const items = clamp(Math.floor(Number.isFinite(count) ? count : 6), 2, 10);
+  const capMax = clamp(Math.floor(Number.isFinite(maxVal) ? maxVal : 12), 6, 25);
+  const weights = Array.from({ length: items }, () => randInt(1, capMax));
+  const values = Array.from({ length: items }, () => randInt(1, capMax));
+  const W = randInt(Math.max(5, Math.floor(capMax * 0.6)), capMax);
+  return { weights, values, W };
+};
+
 const pickIndex = (step, vars, key) => {
   const direct = step?.[key];
   if (Number.isFinite(direct)) return direct;
@@ -208,37 +321,13 @@ export default function Simulator() {
   const [mentorFeedback, setMentorFeedback] = useState(null);
 
   // graph input
-  const [graphInput, setGraphInput] = useState(() => ({
-    start: "A",
-    graph: {
-      directed: false,
-      nodes: [
-        { id: "A", x: 80, y: 80 },
-        { id: "B", x: 220, y: 60 },
-        { id: "C", x: 330, y: 140 },
-        { id: "D", x: 140, y: 200 },
-        { id: "E", x: 260, y: 240 },
-      ],
-      edges: [
-        { from: "A", to: "B" },
-        { from: "A", to: "D" },
-        { from: "B", to: "C" },
-        { from: "B", to: "D" },
-        { from: "C", to: "E" },
-        { from: "D", to: "E" },
-      ],
-    },
-  }));
+  const [graphInput, setGraphInput] = useState(() => buildDefaultGraphInput());
 
   // dp input
-  const [dpInput, setDpInput] = useState(() => ({
-    weights: [2, 3, 4, 5],
-    values: [3, 4, 5, 8],
-    W: 8,
-  }));
+  const [dpInput, setDpInput] = useState(() => buildDefaultDpInput());
 
   // input/output
-  const [inputArr, setInputArr] = useState([5, 1, 4, 2, 8, 3]);
+  const [inputArr, setInputArr] = useState(DEFAULT_ARRAY);
   const outputArr = useMemo(() => computeOutput(algorithm, inputArr), [algorithm, inputArr]);
 
   const maxStep = Math.max(0, steps.length - 1);
@@ -337,8 +426,16 @@ export default function Simulator() {
   }, [stepIndex, maxStep, steps.length, status]);
 
   const onGenerateRandom = () => {
-    const arr = Array.from({ length: n }, () => 1 + Math.floor(Math.random() * randMax));
-    setInputArr(arr);
+    if (algoType === "array") {
+      const size = clamp(Math.floor(Number.isFinite(n) ? n : 10), 2, 40);
+      const maxVal = Math.max(2, Math.floor(Number.isFinite(randMax) ? randMax : 50));
+      const arr = Array.from({ length: size }, () => 1 + Math.floor(Math.random() * maxVal));
+      setInputArr(arr);
+    } else if (algoType === "graph") {
+      setGraphInput(buildRandomGraphInput(n));
+    } else {
+      setDpInput(buildRandomDpInput(n, randMax));
+    }
     setSteps([]);
     setStepIndex(0);
     setStatus("idle");
@@ -349,7 +446,13 @@ export default function Simulator() {
   };
 
   const onLoadExample = () => {
-    setInputArr([5, 1, 4, 2, 8, 3]);
+    if (algoType === "array") {
+      setInputArr([...DEFAULT_ARRAY]);
+    } else if (algoType === "graph") {
+      setGraphInput(buildDefaultGraphInput());
+    } else {
+      setDpInput(buildDefaultDpInput());
+    }
     setSteps([]);
     setStepIndex(0);
     setStatus("idle");
