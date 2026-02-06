@@ -668,7 +668,7 @@ export default function Simulator() {
                       disabled={mentorMode && mentorLocked}
                       title={mentorMode && mentorLocked ? "Mentor locked: answer or skip" : ""}
                     >
-                      Next Step (-&gt;)
+                      Next Step (&rarr;)
                     </button>
                   </div>
                 </div>
