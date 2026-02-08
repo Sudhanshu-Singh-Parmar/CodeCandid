@@ -135,16 +135,31 @@ CodeCandid aligns strongly with **experiential and inquiry-based learning**:
 
 ## 🧑‍💻 Getting Started
 
+### Clone the repository
 ```bash
 git clone https://github.com/Sudhanshu-Singh-Parmar/CodeCandid.git
 cd CodeCandid
+```
+
+### Install dependencies
+```
 npm install
+```
+
+### Start backend (AI / server)
+```
 npm run server
+```
+
+### Start frontend (in a new terminal)
+```
 npm run dev
 ```
-NOTE -:  run "npm dev in new terminal"
 
 Open `http://localhost:5173` in your browser.
+
+> *Note:
+To use Candid AI, create a .env file in the root directory, copy contents from .env.example, and replace CodeCandid_AI with a valid Gemini API key.*
 
 ---
 
@@ -152,7 +167,7 @@ Open `http://localhost:5173` in your browser.
 
 Deployment-ready for:
 - GitHub Pages  
-- Vercel  
+- Vercel -: https://code-candid-chi.vercel.app/
 - Netlify  
 
 ---
